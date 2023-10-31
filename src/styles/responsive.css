@@ -1,0 +1,70 @@
+@media screen and (width<=1200px){
+  .card-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .img-resto {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+  
+  @media screen and (min-width: 650px) {
+    .app-bar {
+      grid-template-columns: 1fr auto;
+      padding: 8px 32px;
+    }
+   
+    .app-bar .app-bar__brand h1 {
+      font-size: 1.5em;
+    }
+   
+    .app-bar .app-bar__menu {
+      display: none;
+    }
+   
+    .app-bar .app-bar__navigation {
+      position: static;
+      width: 100%;
+    }
+   
+    .app-bar .app-bar__navigation ul li {
+      display: inline-block;
+    }
+   
+    .app-bar .app-bar__navigation ul li a {
+      display: inline-block;
+      width: 120px;
+      text-align: center;
+      margin: 0;
+    }
+
+  .card-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .img-resto {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .open {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+
+  .info p{
+    margin-top:10px;
+  }
+  }
+@media screen and (width>650px) {
+
+  #nav-mobile,
+  .header-nav-mobile {
+    display: none;
+  }
+}
+  
