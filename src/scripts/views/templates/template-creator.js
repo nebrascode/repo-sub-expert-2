@@ -2,7 +2,7 @@ import CONFIG from '../../globals/config';
 
 const createDetailRestoTemplate = (restaurant) => `
   <h2 class="restaurant__title">${restaurant.name}</h2>
-  <img class="restaurant__poster" src="${CONFIG.BASE_IMAGE_URL}/${restaurant.pictureId}" alt="${restaurant.name}" />
+  <img class="restaurant__poster" src="${CONFIG.IMAGE_BASE_URL}/${restaurant.pictureId}" alt="${restaurant.name}" />
   <div class="restaurant__info">
     <h3>Information</h3>
     <p>${restaurant.description}</p>
@@ -15,23 +15,44 @@ const createDetailRestoTemplate = (restaurant) => `
     <h4>Rating</h4>
     <p>${restaurant.rating}</p>
   </div>
-  <div class="restaurant__overview">
-    <h3>Overview</h3>
-    <p>${restaurant.overview}</p>
+  <div class="restaurant__review">
+    <h3>Review</h3>
+    <p>${restaurant.customerReviews}</p>
+  </div>
+  <div class="restaurant__menu">
+    <h3>Menus</h3>
+    
   </div>
 `;
 
 const createListResto = (restaurant) => ` 
   <div class="card-list">
-    <img class="img-resto" src="${CONFIG.IMAGE_BASE_URL.pictureId}" alt="resto image">
+    <img class="img-resto" src="${CONFIG.IMAGE_BASE_URL}/${restaurant.pictureId}" alt="resto image">
     <div class="card-body">
-      <h3>${restaurant.name}</h3>
+      <h3><a href="/#/detail/${restaurant.id}">${restaurant.name}</a></h3>
       <p id="description">${restaurant.description}</p>
       <div class="info">
-          <p>Rating : ${restaurant.rating}</p>
-          <p>Kota : ${restaurant.city}</p>
+          <p>⭐️ : ${restaurant.rating}</p>
+          <p>📍: ${restaurant.city}</p>
       </div>
     </div>
   </div>
 `;
-export { createDetailRestoTemplate, createListResto };
+
+const createLikeButtonTemplate = () => `
+  <button aria-label="like this movie" id="likeButton" class="like">
+    <i class="fa fa-heart-o" aria-hidden="true"></i>
+  </button>
+`;
+
+const createLikedButtonTemplate = () => `
+  <button aria-label="unlike this movie" id="likeButton" class="like">
+    <i class="fa fa-heart" aria-hidden="true"></i>
+  </button>
+`;
+export {
+  createDetailRestoTemplate,
+  createListResto,
+  createLikeButtonTemplate,
+  createLikedButtonTemplate,
+};

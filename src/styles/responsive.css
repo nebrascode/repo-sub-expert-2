@@ -8,7 +8,13 @@
     margin-left: auto;
     margin-right: auto;
   }
-}
+    #resto-list{
+      grid-template-columns:repeat(1, 1fr);
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
   
   @media screen and (min-width: 650px) {
     .app-bar {
@@ -39,7 +45,6 @@
       text-align: center;
       margin: 0;
     }
-
   .card-list {
     display: flex;
     flex-direction: column;
@@ -60,11 +65,6 @@
     margin-top:10px;
   }
   }
-@media screen and (width>650px) {
 
-  #nav-mobile,
-  .header-nav-mobile {
-    display: none;
-  }
-}
   
+

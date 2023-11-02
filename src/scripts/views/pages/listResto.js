@@ -5,7 +5,7 @@ const listResto = {
   async render() {
     return `
       <div class="content">
-        <h2 class="content__heading">Now Playing in Cinema</h2>
+        <h2 class="content__heading">Restaurants</h2>
         <div id="resto-list" class="list">
         </div>
       </div>
@@ -13,11 +13,9 @@ const listResto = {
   },
 
   async afterRender() {
-    const data = await TheRestoDbSource.listResto();
-    const listRestoElement = document.querySelector('#list-resto');
-    listRestoElement.innerHTML = '';
-
-    data.restaurants.forEach((restaurant) => {
+    const restaurants = await TheRestoDbSource.listResto();
+    const listRestoElement = document.querySelector('#resto-list');
+    restaurants.forEach((restaurant) => {
       listRestoElement.innerHTML += createListResto(restaurant);
     });
   },

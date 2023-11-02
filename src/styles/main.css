@@ -128,19 +128,20 @@ body {
 
 }
 
-.card-list {
-  width: 80%;
-  margin-top: 2rem;
-  border-radius: 20px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 2rem;
-  padding: 20px;
+#resto-list{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin: 32px 50px;
 }
+
+.card-list {
+  width: 100%;
+  box-shadow: 2px 4px 8px 4px rgba(41, 41, 41, 0.223);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
 .card-list:focus{
  outline: #000;
 }
@@ -185,4 +186,21 @@ footer {
   display: none;
 }
 
+/* DETAIL RESTO */
+.detail-resto{
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: 2fr;
+  gap: 18px 16px;
+}
+.detail-resto .restaurant__poster{
+  max-height:380px;
+  justify-content: center;
+}
+
+.detail-resto .restaurant__info h4 {
+  margin: 8px 0;
+}
 
