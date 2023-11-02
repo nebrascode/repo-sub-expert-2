@@ -5,13 +5,13 @@ import { createDetailRestoTemplate } from '../templates/template-creator';
 const Detail = {
   async render() {
     return `
-      <div id="resto" class="resto"></div>
+      <div id="resto" class="detail-resto"></div>
     `;
   },
 
   async afterRender() {
     const url = UrlParser.parseActiveUrlWithoutCombiner();
-    const resto = await TheRestoDbSource.detailMovie(url.id);
+    const resto = await TheRestoDbSource.detailResto(url.id);
     const restoContainer = document.querySelector('#resto');
     restoContainer.innerHTML = createDetailRestoTemplate(resto);
   },
