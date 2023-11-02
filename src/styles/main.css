@@ -204,3 +204,20 @@ footer {
   margin: 8px 0;
 }
 
+.like {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  position: fixed;
+  margin-bottom: 5rem;
+  right: 16px;
+  border-radius: 50%;
+  border: 0;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+}
+

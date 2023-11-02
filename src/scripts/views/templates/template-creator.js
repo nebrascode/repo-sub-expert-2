@@ -11,7 +11,7 @@ const createDetailRestoTemplate = (restaurant) => `
     <h4>Address</h4>
     <p>${restaurant.address} minutes</p>
     <h4>Categories</h4>
-    <p>${restaurant.categories} minutes</p>
+    <p>${restaurant.categories.name} minutes</p>
     <h4>Rating</h4>
     <p>${restaurant.rating}</p>
   </div>
@@ -40,13 +40,13 @@ const createListResto = (restaurant) => `
 `;
 
 const createLikeButtonTemplate = () => `
-  <button aria-label="like this movie" id="likeButton" class="like">
+  <button aria-label="like this resto" id="likeButton" class="like">
     <i class="fa fa-heart-o" aria-hidden="true"></i>
   </button>
 `;
 
 const createLikedButtonTemplate = () => `
-  <button aria-label="unlike this movie" id="likeButton" class="like">
+  <button aria-label="unlike this resto" id="likeButton" class="like">
     <i class="fa fa-heart" aria-hidden="true"></i>
   </button>
 `;
