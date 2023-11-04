@@ -204,3 +204,37 @@ footer {
   margin: 8px 0;
 }
 
+table, th, td {
+  border: 1px solid rgba(0, 0, 0, 0.527);
+  border-collapse: collapse;
+}
+
+  th, td {
+    padding: 15px;
+  }
+
+table th{
+  background-color:grey;
+  color: white;
+}
+
+.like {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  
+  position: fixed;
+  bottom: 25px;
+  right: 16px;
+  border-radius: 50%;
+  border: 0;
+  top: auto;
+  
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+}
+
