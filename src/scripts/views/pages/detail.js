@@ -16,7 +16,18 @@ const Detail = {
     const resto = await TheRestoDbSource.detailResto(url.id);
     const restoContainer = document.querySelector('#resto');
     restoContainer.innerHTML = createDetailRestoTemplate(resto);
-
+    fetch(url)
+      .then((response) => response.json())
+      .then((responseData) => {
+        if (responseData.error === false) {
+          console.log('Ulasan berhasil ditambahkan');
+        } else {
+          console.error('Gagal menambahkan ulasan:', responseData.message);
+        }
+      })
+      .catch((error) => {
+        console.error('Terjadi kesalahan saat menambahkan ulasan:', error);
+      });
     LikeButtonInitiator.init({
       likeButtonContainer: document.querySelector('#likeButtonContainer'),
       resto,

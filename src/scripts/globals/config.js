@@ -5,6 +5,7 @@ const CONFIG = {
   DATABASE_NAME: 'resto-catalogue-database',
   DATABASE_VERSION: 1,
   OBJECT_STORE_NAME: 'restaurants',
+  WEB_SOCKET_SERVER: 'wss://restaurants-api.dicoding.dev',
 };
 
 export default CONFIG;
