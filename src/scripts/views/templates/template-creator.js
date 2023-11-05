@@ -1,25 +1,18 @@
 import CONFIG from '../../globals/config';
 
 const createDetailRestoTemplate = (restaurant) => `
-  <h2 class="restaurant__title">${restaurant.name}</h2>
-  <img class="restaurant__poster" src="${CONFIG.IMAGE_BASE_URL}/${restaurant.pictureId}" alt="${restaurant.name}" />
-  <div class="restaurant__info">
-    <h3>Information</h3>
+    <h2 class="restaurant__title">${restaurant.name}</h2>
+    <img class="restaurant__poster" src="${CONFIG.IMAGE_BASE_URL}/${restaurant.pictureId}" alt="${restaurant.name}" crossorigin="anonymous"/>
+    <h3>Description</h3>
     <p>${restaurant.description}</p>
-    <h4>City</h4>
-    <p>${restaurant.city}</p>
-    <h4>Address</h4>
-    <p>${restaurant.address} minutes</p>
-    <h4>Categories</h4>
-    <p>${restaurant.categories.name} minutes</p>
-    <h4>Rating</h4>
-    <p>⭐️ ${restaurant.rating}</p>
-  </div>
-  <div class="restaurant__review">
-    <h3>Review</h3>
-    <p>${restaurant.customerReviews}</p>
-    
-  </div>
+    <p><strong>#${restaurant.categories.map((kategori) => kategori.name)}</strong></p>
+    <h3>Information</h3>
+    <div class="restaurant__info">
+      <p><strong>City:</strong>${restaurant.city}</p>
+      <p><strong>Adress:</strong>${restaurant.address} minutes</p>
+      <p><strong>Rating:</strong>${restaurant.rating}⭐️</p>
+    </div>
+
   <div class="restaurant__menu">
     <h3>Menus</h3>
     <table>
@@ -33,11 +26,24 @@ const createDetailRestoTemplate = (restaurant) => `
       </tr>
     </table>
   </div>
+
+  <div class="restaurant__review">
+    <h3>Reviews</h3>
+    <div class="reviews">
+      ${restaurant.customerReviews.map((review) => `
+        <div class="card-review">
+          <p><strong>Name:</strong> ${review.name}</p>
+          <p><strong>Review:</strong> ${review.review}</p>
+          <p><strong>Date:</strong> ${review.date}</p>
+        </div>
+      `).join('')}
+    </div>
+  </div>
 `;
 
 const createListResto = (restaurant) => ` 
   <div class="card-list">
-    <img class="img-resto" src="${CONFIG.IMAGE_BASE_URL}/${restaurant.pictureId}" alt="resto image">
+    <img class="img-resto" src="${CONFIG.IMAGE_BASE_URL}/${restaurant.pictureId}" crossorigin="anonymous" alt="resto image">
     <div class="card-body">
       <h3><a href="/#/detail/${restaurant.id}">${restaurant.name}</a></h3>
       <p id="description">${restaurant.description}</p>
