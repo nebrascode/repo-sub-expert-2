@@ -14,6 +14,9 @@
       margin-left: auto;
       margin-right: auto;
     }
+    .detail-resto .restaurant__poster{
+      max-width:100%;
+    }
   }
   
   @media screen and (min-width:650px) {
@@ -64,7 +67,9 @@
   .info p{
     margin-top:10px;
   }
-  }
+
+  
+}
 
   
 
