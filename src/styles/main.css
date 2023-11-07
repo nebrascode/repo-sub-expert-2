@@ -155,8 +155,7 @@ body {
 .card-list h3  {
   text-align: center;
   font-size: 28px;
-  height: 44px;
-  bottom: 1rem;
+  margin: 1rem;
 }
 
 .card-list a{
@@ -215,10 +214,11 @@ footer {
 .detail-resto .restaurant__poster{
   max-height:380px;
   justify-content: center;
+  max-width:100%;
 }
 
 table{
-  max-width: 100%;
+  max-width:100%;
 }
 table, th, td {
   border: 1px solid rgba(0, 0, 0, 0.527);
