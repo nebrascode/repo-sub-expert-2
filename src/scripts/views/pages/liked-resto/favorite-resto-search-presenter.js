@@ -19,6 +19,7 @@ class FavoriteRestoSearchPresenter {
     this._showFoundResto(foundResto);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   _showFoundResto(restos) {
     const html = restos.reduce(
       (carry, resto) => carry.concat(`

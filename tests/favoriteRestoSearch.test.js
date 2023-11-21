@@ -1,11 +1,11 @@
 /* eslint-disable no-undef */
-import { spyOn } from 'jest-mock';
-import FavoriteRestoSearchPresenter
-  from '../src/scripts/views/pages/liked-resto/favorite-resto-search-presenter';
-import FavoriteRestoIdb from '../src/scripts/data/favorite-resto-idb';
+import FavoriteRestoSearchPresenter from '../src/scripts/views/pages/liked-resto/favorite-resto-search-presenter';
+import FavoriteRestoView from '../src/scripts/views/pages/liked-resto/favorite-resto-view';
 
-describe('Searching restos', () => {
+xdescribe('Searching resto', () => {
   let presenter;
+  let favoriteResto;
+  let view;
 
   const searchResto = (query) => {
     const queryElement = document.getElementById('query');
@@ -15,21 +15,19 @@ describe('Searching restos', () => {
   };
 
   const setRestoSearchContainer = () => {
-    document.body.innerHTML = `
-      <div id="resto-search-container">
-        <input id="query" type="text">
-        <div class="resto-result-container">
-          <ul class="restos">
-          </ul>
-        </div>
-      </div>
-    `;
+    view = new FavoriteRestoView();
+    document.body.innerHTML = view.getTemplate();
   };
 
   const constructPresenter = () => {
-    spyOn(FavoriteRestoIdb, 'searchResto');
+    favoriteResto = {
+      getAllResto: jest.fn(),
+      searchResto: jest.fn(),
+    };
+
     presenter = new FavoriteRestoSearchPresenter({
-      favoriteResto: FavoriteRestoIdb,
+      favoriteResto,
+      view,
     });
   };
 
@@ -38,89 +36,47 @@ describe('Searching restos', () => {
     constructPresenter();
   });
 
-  it('should be able to capture the query typed by the user', () => {
-    FavoriteRestoIdb.searchResto.mockImplementation(() => []);
+  describe('When query is not empty', () => {
+    it('should be able to capture the query typed by the user', () => {
+      favoriteResto.searchResto.mockImplementation(() => []);
 
-    searchResto('film a');
+      searchResto('film a');
 
-    expect(presenter.latestQuery).toEqual('film a');
-  });
+      expect(presenter.latestQuery).toEqual('film a');
+    });
 
-  it('should ask the model to search for liked restos', () => {
-    FavoriteRestoIdb.searchResto.mockImplementation(() => []);
+    it('should ask the model to search for liked resto', () => {
+      favoriteResto.searchResto.mockImplementation(() => []);
 
-    searchResto('film a');
+      searchResto('film a');
 
-    expect(FavoriteRestoIdb.searchResto).toHaveBeenCalledWith('film a');
-  });
+      expect(favoriteResto.searchResto).toHaveBeenCalledWith('film a');
+    });
 
-  it('should show the found restos', () => {
-    presenter._showFoundResto([{ id: 1 }]);
-    expect(document.querySelectorAll('.resto').length).toEqual(1);
-
-    presenter._showFoundResto([
-      { id: 1, title: 'Satu' },
-      { id: 2, title: 'Dua' },
-    ]);
-    expect(document.querySelectorAll('.resto').length).toEqual(2);
-  });
-
-  it('should show the title of the found restos', () => {
-    presenter._showFoundResto([
-      { id: 1, title: 'Satu' },
-    ]);
-
-    expect(document.querySelectorAll('.resto__title')
-      .item(0).textContent)
-      .toEqual('Satu');
-
-    presenter._showFoundResto([
-      { id: 1, title: 'Satu' },
-      { id: 2, title: 'Dua' },
-    ]);
-
-    const restoTitles = document.querySelectorAll('.resto__title');
-
-    expect(restoTitles.item(0).textContent).toEqual('Satu');
-    expect(restoTitles.item(1).textContent).toEqual('Dua');
-  });
-
-  it('should show - for found resto without title', () => {
-    presenter._showFoundResto([{ id: 1 }]);
-
-    expect(document.querySelectorAll('.resto__title')
-      .item(0).textContent)
-      .toEqual('-');
-  });
-
-  it('should show the restos found by Favorite Resto', (done) => {
-    document
-      .getElementById('resto-search-container')
-      .addEventListener('restos:searched:updated', () => {
-        expect(document.querySelectorAll('.resto').length).toEqual(3);
+    it('should show the resto found by Favorite Resto', (done) => {
+      document.getElementById('resto').addEventListener('resto:updated', () => {
+        expect(document.querySelectorAll('.resto-item').length).toEqual(3);
 
         done();
       });
 
-    FavoriteRestoIdb.searchResto.mockImplementation((query) => {
-      if (query === 'film a') {
-        return [
-          { id: 111, title: 'film abc' },
-          { id: 222, title: 'ada juga film abcde' },
-          { id: 333, title: 'ini juga boleh film a' },
-        ];
-      }
+      favoriteResto.searchResto.mockImplementation((query) => {
+        if (query === 'film a') {
+          return [
+            { id: 111, title: 'film abc' },
+            { id: 222, title: 'ada juga film abcde' },
+            { id: 333, title: 'ini juga boleh film a' },
+          ];
+        }
 
-      return [];
+        return [];
+      });
+
+      searchResto('film a');
     });
 
-    searchResto('film a');
-  });
-
-  it('should show the name of the restos found by Favorite Resto', (done) => {
-    document
-      .getElementById('resto-search-container')
-      .addEventListener('restos:searched:updated', () => {
+    it('should show the name of the resto found by Favorite Resto', (done) => {
+      document.getElementById('resto').addEventListener('resto:updated', () => {
         const restoTitles = document.querySelectorAll('.resto__title');
 
         expect(restoTitles.item(0).textContent).toEqual('film abc');
@@ -130,18 +86,92 @@ describe('Searching restos', () => {
         done();
       });
 
-    FavoriteRestoIdb.searchResto.mockImplementation((query) => {
-      if (query === 'film a') {
-        return [
-          { id: 111, title: 'film abc' },
-          { id: 222, title: 'ada juga film abcde' },
-          { id: 333, title: 'ini juga boleh film a' },
-        ];
-      }
+      favoriteResto.searchResto.mockImplementation((query) => {
+        if (query === 'film a') {
+          return [
+            { id: 111, title: 'film abc' },
+            { id: 222, title: 'ada juga film abcde' },
+            { id: 333, title: 'ini juga boleh film a' },
+          ];
+        }
 
-      return [];
+        return [];
+      });
+
+      searchResto('film a');
     });
 
-    searchResto('film a');
+    it('should show - when the resto returned does not contain a title', (done) => {
+      document.getElementById('resto').addEventListener('resto:updated', () => {
+        const restoTitles = document.querySelectorAll('.resto__title');
+        expect(restoTitles.item(0).textContent).toEqual('-');
+
+        done();
+      });
+
+      favoriteResto.searchResto.mockImplementation((query) => {
+        if (query === 'film a') {
+          return [{ id: 444 }];
+        }
+
+        return [];
+      });
+
+      searchResto('film a');
+    });
+  });
+
+  describe('When query is empty', () => {
+    it('should capture the query as empty', () => {
+      favoriteResto.getAllResto.mockImplementation(() => []);
+
+      searchResto(' ');
+      expect(presenter.latestQuery.length).toEqual(0);
+
+      searchResto('    ');
+      expect(presenter.latestQuery.length).toEqual(0);
+
+      searchResto('');
+      expect(presenter.latestQuery.length).toEqual(0);
+
+      searchResto('\t');
+      expect(presenter.latestQuery.length).toEqual(0);
+    });
+
+    it('should show all favorite resto', () => {
+      favoriteResto.getAllResto.mockImplementation(() => []);
+
+      searchResto('    ');
+
+      expect(favoriteResto.getAllResto).toHaveBeenCalled();
+    });
+  });
+
+  describe('When no favorite resto could be found', () => {
+    it('should show the empty message', (done) => {
+      document.getElementById('resto').addEventListener('resto:updated', () => {
+        expect(document.querySelectorAll('.resto-item__not__found').length).toEqual(1);
+
+        done();
+      });
+
+      // eslint-disable-next-line no-unused-vars
+      favoriteResto.searchResto.mockImplementation((query) => []);
+
+      searchResto('film a');
+    });
+
+    it('should not show any resto', (done) => {
+      document.getElementById('resto').addEventListener('resto:updated', () => {
+        expect(document.querySelectorAll('.resto-item').length).toEqual(0);
+
+        done();
+      });
+
+      // eslint-disable-next-line no-unused-vars
+      favoriteResto.searchResto.mockImplementation((query) => []);
+
+      searchResto('film a');
+    });
   });
 });

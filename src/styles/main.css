@@ -79,13 +79,14 @@ body {
 
 .skip-link {
   position: absolute;
-  top:-35px;
+  top:-45px;
   left:0;
   background-color: #bf1722;
   color: white;
   padding: 8px;
   z-index: 100;
-
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .skip-link:focus {
@@ -95,18 +96,18 @@ body {
 .hero {
   display: flex;
   align-items: center;
-  min-height: 500px;
-  width: 100%;
   text-align: center;
-  background-image: url('../public/images/heros/hero-image_4.jpg');
+  background-image: url('../public/images/hero-image_4.jpg');
+  background-size:100%;
+  background-position:center;
   background-color: #000;
-  background-repeat: repeat-x;
-  background-position: center;
+  background-repeat: no-repeat;
+  height: 300px;
 }
 
 .hero__inner {
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 80%;
 }
 
 .hero__title {
@@ -170,7 +171,10 @@ body {
 
 
 .card-list img {
+  height: auto;
   width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .info{
@@ -196,9 +200,9 @@ footer {
 }
 
 #hamburgerButton{
-  height: 50px;
-  width: 50px;
-  font-size:25px;
+  min-height: 50px;
+  min-width: 50px;
+  font-size:40px;
 }
 
 /* DETAIL RESTO */
@@ -267,4 +271,5 @@ div .card-review{
   color: white;
   cursor: pointer;
 }
+
 

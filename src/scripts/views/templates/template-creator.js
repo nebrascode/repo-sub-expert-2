@@ -2,7 +2,7 @@ import CONFIG from '../../globals/config';
 
 const createDetailRestoTemplate = (restaurant) => `
     <h2 class="restaurant__title">${restaurant.name}</h2>
-    <img class="restaurant__poster" src="${CONFIG.IMAGE_BASE_URL}/${restaurant.pictureId}" alt="${restaurant.name}" crossorigin="anonymous"/>
+    <img class="lazyload restaurant__poster" loading="lazy"  data-src="${CONFIG.IMAGE_BASE_URL}/${restaurant.pictureId}" alt="${restaurant.name}" crossorigin="anonymous"/>
     <h3>Description</h3>
     <p>${restaurant.description}</p>
     <p><strong>#${restaurant.categories.map((kategori) => kategori.name)}</strong></p>
@@ -43,9 +43,9 @@ const createDetailRestoTemplate = (restaurant) => `
 
 const createListResto = (restaurant) => ` 
   <div class="card-list">
-    <img class="img-resto" src="${CONFIG.IMAGE_BASE_URL}/${restaurant.pictureId}" crossorigin="anonymous" alt="resto image">
+    <img loading="lazy" class="lazyload img-resto" data-src="${CONFIG.IMAGE_BASE_URL}/${restaurant.pictureId}" crossorigin="anonymous" alt="resto image" loading="lazy">
     <div class="card-body">
-      <h3><a href="/#/detail/${restaurant.id}">${restaurant.name}</a></h3>
+      <h3><a href="/#/detail/${restaurant.id}" class="restaurant__title">${restaurant.name}</a></h3>
       <p id="description">${restaurant.description}</p>
       <div class="info">
           <p>⭐️ : ${restaurant.rating}</p>
