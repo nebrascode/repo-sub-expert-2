@@ -5,7 +5,7 @@ const Like = {
   async render() {
     return `
     <div class="content">
-      <h2 class="content__heading">Restaurants</h2>
+      <h2 class="content__heading">Your Favorite Restaurants</h2>
       <div id="resto-list" class="list">
       </div>
     </div>
@@ -14,9 +14,20 @@ const Like = {
 
   async afterRender() {
     const restaurants = await FavoriteRestoIdb.getAllResto();
-    const listRestoElement = document.querySelector('#resto-list');
+    const restaurantsContainer = document.querySelector('#resto-list');
+
+    if (restaurants.length === 0) {
+      restaurantsContainer.innerHTML = `<div class="resto-item__not__found">
+      Tidak ada resto untuk ditampilkan
+    </div>`;
+    } else {
+      restaurants.forEach((restaurant) => {
+        restaurantsContainer.innerHTML += createListResto(restaurant);
+        console.log(restaurant);
+      });
+    }
     restaurants.forEach((restaurant) => {
-      listRestoElement.innerHTML += createListResto(restaurant);
+      restaurantsContainer.innerHTML += createListResto(restaurant);
     });
   },
 };

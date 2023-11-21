@@ -20,7 +20,7 @@ exports.config = {
   include: {
     I: './steps_file.js',
   },
-  name: 'resto-catalogue',
+  name: 'submission-kedua',
   plugins: {
     screenshotOnFail: {
       enabled: false,

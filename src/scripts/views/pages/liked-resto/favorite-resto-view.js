@@ -1,4 +1,5 @@
-import { createRestoItemTemplate } from '../../templates/template-creator';
+/* eslint-disable class-methods-use-this */
+import { createListResto } from '../../templates/template-creator';
 
 class FavoriteRestoView {
   getTemplate() {
@@ -19,10 +20,10 @@ class FavoriteRestoView {
     });
   }
 
-  showFavoriteResto(restos) {
+  _showFavoriteResto(restos) {
     let html;
     if (restos.length) {
-      html = restos.reduce((carry, resto) => carry.concat(createRestoItemTemplate(resto)), '');
+      html = restos.reduce((carry, resto) => carry.concat(createListResto(resto)), '');
     } else {
       html = this._getEmptyRestoTemplate();
     }
@@ -35,7 +36,7 @@ class FavoriteRestoView {
   _getEmptyRestoTemplate() {
     return `
       <div class="resto-item__not__found">
-        Tidak ada film untuk ditampilkan
+        Tidak ada resto untuk ditampilkan
       </div>
     `;
   }
